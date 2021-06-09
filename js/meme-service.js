@@ -69,7 +69,7 @@ function createImgs() {
 
 function _createImg(id) {
     var img = new Image();
-    img.src = `/img/memes-v/${id+1}.jpg`;
+    img.src = `img/memes-v/${id+1}.jpg`;
     img.onload;
     return {
         id,
