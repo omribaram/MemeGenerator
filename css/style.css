@@ -23,6 +23,13 @@ img {
     cursor: pointer;
 }
 
+a,
+a:visited,
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
 
 /* Layout */
 
@@ -45,9 +52,30 @@ header {
     justify-content: space-between;
     align-items: center;
     grid-column: 1/-1;
-    grid-row: 1/1;
+    grid-row: 1/2;
     padding-block: 10px;
     min-height: 65px;
+}
+
+.keywords-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-column: 1/-1;
+    grid-row: 2/3;
+    min-height: 100px;
+    overflow: auto;
+}
+
+main {
+    grid-column: 1/-1;
+    grid-row: 3/4;
+}
+
+main.editor,
+main.memes {
+    grid-column: 1/-1;
+    grid-row: 2/4;
 }
 
 .logo {
@@ -58,35 +86,39 @@ header {
 
 .keywords {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
-    grid-column: 1/-1;
-    grid-row: 2/3;
-    min-height: 100px;
 }
 
 .gallery {
     padding-block: 10px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(50px, 50px));
+    grid-template-columns: repeat(auto-fit, minmax(60px, 60px));
     grid-auto-rows: minmax(50px, 80px);
     grid-auto-flow: dense;
     gap: 40px;
-    grid-column: 1/-1;
-    grid-row: 3/4;
 }
 
-[class^="card-image"].square {
+.memes {
+    padding-block: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 50px));
+    gap: 40px;
+    grid-column: 1/-1;
+}
+
+[class^="card-image"] {
     grid-column: span 3;
     grid-row: span 2;
     object-fit: cover;
 }
 
-[class^="card-image"].landscape {
+
+/* [class^="card-image"].landscape {
     grid-column: span 5;
     grid-row: span 2;
     object-fit: cover;
-}
+} */
 
 .canvas-editor {
     display: flex;
@@ -123,12 +155,66 @@ main {
     background-color: #e3e3e3;
 }
 
-.keywords {
+.keywords-container {
     background-color: white;
+}
+
+span[class^="keyword"] {
+    padding-inline: 10px;
+    cursor: pointer;
+}
+
+.keyword1 {
+    font-size: 1.1em;
+}
+
+.keyword2 {
+    font-size: 1.2em;
+}
+
+.keyword3 {
+    font-size: 1.3em;
+}
+
+.keyword4 {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.keyword5 {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.keyword6 {
+    font-size: 1.7em;
+    color: brown;
+    font-weight: bold;
+}
+
+.keyword7 {
+    font-size: 1.9em;
+    color: brown;
+    font-weight: bolder;
+}
+
+.keyword8 {
+    font-size: 2em;
+    color: brown;
+    font-weight: bolder;
+}
+
+.keywords-toggle {
+    color: red;
+    font-weight: bold;
 }
 
 *.hidden {
     display: none;
+}
+
+[class$=-button] {
+    cursor: pointer;
 }
 
 [class^="card-image"] img {
@@ -139,6 +225,41 @@ main {
     box-shadow: 0px 1px 20px 1px steelblue;
     transform: scale(1.2);
     transition: transform .6s;
+}
+
+.stickers-container {
+    display: flex;
+    align-items: center;
+}
+
+.stickers {
+    display: flex;
+    flex-basis: 355px;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+span[class^="sticker"] {
+    font-size: 3em;
+    cursor: pointer;
+}
+
+[class^="page"] {
+    display: inline-block;
+    width: 35px;
+    height: 48px;
+    background-image: url('../img/icons/arrows.png');
+    background-repeat: no-repeat;
+    background-size: 155px;
+    cursor: pointer;
+}
+
+.page-prev {
+    background-position: -15px -50px
+}
+
+.page-next {
+    background-position: -103px -50px
 }
 
 footer {
