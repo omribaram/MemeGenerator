@@ -638,7 +638,7 @@ main {
 
 .keywords-container {
     background-color: white;
-    /* filter: drop-shadow(1px 2px 15px rgb(0 170 204 / 0.5)) */
+    filter: drop-shadow(1px 2px 15px rgb(0 170 204 / 0.5))
 }
 
 span[class^="keyword"] {
@@ -798,6 +798,12 @@ footer {
     }
     .hamburger.active .bar:nth-child(3) {
         transform: translateY(-10px) rotate(-45deg);
+    }
+    header {
+        filter: unset
+    }
+    .keywords-container {
+        filter: unset
     }
 }
 
