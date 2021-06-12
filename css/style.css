@@ -402,6 +402,17 @@ section.editor {
     justify-content: space-evenly;
 }
 
+.empty-meme {
+    font-size: 3rem;
+    padding-block: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+}
+
 .meme-text {
     width: 100%;
     grid-column: 1/-1;
@@ -633,7 +644,7 @@ header {
     background: radial-gradient(circle, rgba(0, 152, 250, 1) 0%, rgba(70, 162, 252, 1) 100%);
     color: white;
     font-size: 18px;
-    filter: drop-shadow(1px 2px 20px rgb(0 152 250 / 1.3))
+    filter: drop-shadow(1px 2px 20px rgb(0 152 250 / 0.7))
 }
 
 main {
