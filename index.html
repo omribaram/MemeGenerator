@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="css/style.css">
     <title>Ultimate Meme Generator</title>
 </head>
@@ -13,79 +12,95 @@
     <div class="layout">
 
         <header class="main-padding">
-            <div class="logo">
-                <img src="img/logo/LOGO.png">
-            </div>
-            <div>
-                <span class="gallery-button hidden" onclick="onToggleGallery()">Memes Gallery</span>
-                <span class="memes-button" onclick="onToggleMemes()">Your Saved Memes</span>
-            </div>
+            <div class="header-title" data-heading="MEME-ME">MEME-ME</div>
+            <nav class="main-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="onToggleGallery()">Memes Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="onToggleMemes()">Saved Memes</a>
+                    </li>
+                </ul>
+                <div class="hamburger" onclick="onToggleHamMenu()">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
         </header>
 
         <section class="keywords-container main-padding">
-            <div>
-                <input type="text" class="search-keyword" placeholder="Enter keyword..." oninput="onSetSearch(this.value)">
+            <div class="search">
+                <input type="search" class="search-keyword" placeholder="Enter keyword..." oninput="onSetSearch(this.value)">
+                <button class="search-btn">
+                    <img src="img/icons/search-icon.png">
+                </button>
             </div>
-            <div class="keywords">
-            </div>
+            <div class="keywords"></div>
         </section>
 
         <main>
-            <input type="file" class="file-input-button" name="image-upload" onchange="onImgUpload(event)" />
-            <section class="gallery main-padding">
+            <section class="upload-image main-padding">
+                Choose a meme, drag your own image onto this window, or upload:<br/>
+                <input type="file" accept="image/*" class="file-input" name="image-upload" onchange="onUploadImage(event)" />
+                <input type="button" class="file-input-button" value="Browse" />
             </section>
+            <section class="gallery main-padding"></section>
 
-            <section class="memes main-padding">
-            </section>
+            <section class="memes main-padding"></section>
 
-            <section class="canvas-editor main-padding hidden">
-                <canvas name="meme-canvas" height="750px" width="740">
+            <section class="canvas main-padding hidden">
+                <canvas name="meme-canvas" height="450px" width="440">
                         Your browser does not support HTML5 Canvas.
-                    </canvas>
+                </canvas>
                 <section class="editor">
                     <div class="meme-text">
                         <input type="text" class="text-input" placeholder="Enter meme text..." oninput="onDrawText(this.value)">
                     </div>
                     <div class="line-control">
                         <!-- <button onclick="onChangePos(-20)">Up</button>
-                        <button onclick="onChangePos(20)">Down</button> -->
-                        <button onclick="onSwitchLine()">Switch</button>
-                        <button onclick="onAddLine()">Add</button>
-                        <button onclick="onDeleteLine()">Delete</button>
+                            <button onclick="onChangePos(20)">Down</button> -->
+                        <img src="img/icons/switch.png" alt="Switch Line" onclick="onSwitchLine()">
+                        <img src="img/icons/add.png" alt="Add Line" onclick="onAddLine()">
+                        <img src="img/icons/delete.png" alt="Delete Line" onclick="onDeleteLine()">
                     </div>
-                    <div>
-                        Size: <input type="range" min="1" max="100" step="1" value="40" oninput="onSetTextSize(this.value)"><span class="text-size"></span>
-                        <button onclick="onSetAlign('left')">Align Left</button>
-                        <button onclick="onSetAlign('center')">Align Center</button>
-                        <button onclick="onSetAlign('right')">Align Right</button>
-                        <select>
-                            <option value="impact">Impact</option>
+                    <div class="font-control">
+                        <span class="text-lable">Text Size: </span><span class="text-size"></span><input name="text-input-size" type="range" min="1" max="100" step="1" value="40" oninput="onSetTextSize(this.value)">
+                        <select class="text-font " oninput="onSetTextFont(this.value)">
+                                <option value="impact">Impact</option>
+                                <option value="arial">Arial</option>
+                                <option value="tahoma">Tahoma</option>
                         </select>
-                        <input type="color" name="outline-color" oninput="onSetOutlineColor(this.value)">Fill
-                        <input type="color" name="text-color" oninput="onSetTextColor(this.value)">Color
                     </div>
-                    <div>
-                        Stickers
+                    <div class="color-control">
+                        <img src="img/icons/text-color.png" name="text-color" alt="Text color">
+                        <img src="img/icons/text-stroke.png" name="text-stroke" alt="Text stroke">
+                        <input type="color" class="text-color" oninput="onSetOutlineColor(this.value)">
+                        <input type="color" class="text-stroke" oninput="onSetTextColor(this.value)">
                     </div>
-                    <div>
-                        <button class="save-meme-button" onclick="onSaveMeme()">Save Meme</button>
-                        <button class="download-meme-button" onclick="onDownloadMeme(this)"><a>Download Meme</a></button>
+                    <div class="text-align">
+                        <img src="img/icons/aligntleft.png" class="align-left" alt="Align Left" onclick="onSetAlign('left')">
+                        <img src="img/icons/aligntcenter.png" class="align-center" alt="Align center" onclick="onSetAlign('center')">
+                        <img src="img/icons/aligntright.png" class="align-right" alt="Align Right" onclick="onSetAlign('right')">
                     </div>
                     <div class="stickers-container">
-                        <span class="page-prev" onclick="onMovePage(-1)"></span>
+                        <span class="page-prev">
+                            <img src="img/icons/arrow-left.png"  alt="Previous page" onclick="onMovePage(-1)">
+                        </span>
                         <div class="stickers"></div>
-                        <span class="page-next" onclick="onMovePage(1)"></span>
+                        <span class="page-next">
+                            <img src="img/icons/arrow-right.png" alt="Next page" onclick="onMovePage(1)">
+                        </span>
                     </div>
+                    <button class="save-meme-button" onclick="onSaveMeme()">Save</button>
+                    <button class="download-meme-button" onclick="onDownloadMeme(this)"><a>Download</a></button>
                 </section>
             </section>
-
-
         </main>
         <footer>
-            <div class="logo">
-                <img src="img/logo/LOGO.png">
-            </div>
-            all rights reserved.
+            <div class="header-title" data-heading="MEME-ME">MEME-ME</div>
+            © all rights reserved, 2021 || Omri Baram
         </footer>
     </div>
 

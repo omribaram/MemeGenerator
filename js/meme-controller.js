@@ -1,14 +1,20 @@
 'use-strict'
 
 function onInit() {
+    createImgs();
+    getKeywords();
     renderGallery();
     renderKeywords();
+    initCanvas();
+    document.querySelector('.file-input-button').addEventListener('click', () => document.querySelector('.file-input').click())
+    document.querySelector('[name="text-color"]').addEventListener('click', () => document.querySelector('.text-color').click())
+    document.querySelector('[name="text-stroke"]').addEventListener('click', () => document.querySelector('.text-stroke').click())
 }
 
 function renderGallery(size = 8) {
     var imgs = getImgsforGallery();
     var strHTMLs = imgs.map(img => {
-        return `<div class="card-image${img.id} ${img.imgObj.width / img.imgObj.height > 1.35 ? 'landscape' : 'square'}" onclick="onCreateMeme(${img.id})">
+        return `<div class="card-image" onclick="onCreateMeme(${img.id})">
                             ${img.imgObj.outerHTML}
                         </div>`
     }).join('');
@@ -39,8 +45,10 @@ function renderMemes() {
 
 function renderStickers() {
     var stickers = getStickersforDisplay();
-    var strHTMLs = stickers.map((sticker, idx) => {
-        return `<span class="sticker${idx}" onclick="onAddSticker(${idx})">${sticker}</span>`;
+    var idx = gPageIdx * PAGE_SIZE - 1
+    var strHTMLs = stickers.map((sticker) => {
+        idx++
+        return `<span class="sticker${idx}" onclick="onAddStickerEmoji(${idx})">${sticker}</span>`;
     }).join('');
     document.querySelector('.stickers').innerHTML = strHTMLs;
 }
@@ -50,15 +58,25 @@ function onMovePage(diff) {
     renderStickers();
 }
 
-function onAddSticker(idx) {
-    addSticker(idx);
+function onAddStickerEmoji(idx) {
+    addStickerEmoji(idx);
+    drawCanvas();
+}
+
+function onAddStickerImage(img) {
+    addStickerImage(img);
     drawCanvas();
 }
 
 function onCreateMeme(imgId) {
+    onResizeCanvas();
     createMeme('', imgId);
-    initCanvas();
+    drawCanvas();
     onToggleEditor();
+}
+
+function onResizeCanvas() {
+    resizeCanvas();
 }
 
 function onSaveMeme() {
@@ -73,7 +91,7 @@ function onDownloadMeme(elLink) {
 
 function onLoadMeme(idx) {
     loadMeme(idx);
-    initCanvas();
+    drawCanvas();
     onToggleEditor();
 }
 
@@ -87,9 +105,11 @@ function onChangePos(diff) {
     drawCanvas();
 }
 
-function onSwitchLine() {
+function onSwitchLine(line) {
     var elInputText = document.querySelector('.text-input');
-    elInputText.value = switchLine();
+    elInputText.value = switchLine(line);
+    document.querySelector('[name="text-input-size"]').value = gMeme.lines[gMeme.selectedLineIdx].size;
+    document.querySelector('.text-size').innerText = gMeme.lines[gMeme.selectedLineIdx].size;
     drawCanvas()
 }
 
@@ -128,6 +148,8 @@ function onSetKeyword(value) {
 
 function onAddLine() {
     addLine();
+    document.querySelector('[name="text-input-size"]').value = gMeme.lines[gMeme.selectedLineIdx].size;
+    document.querySelector('.text-size').innerText = gMeme.lines[gMeme.selectedLineIdx].size;
     drawCanvas();
 }
 
@@ -136,8 +158,19 @@ function onDeleteLine() {
     drawCanvas();
 }
 
-function onImgUpload(ev) {
-    imgUpload(ev, createImg)
+function onSetTextFont(font) {
+    setTextFont(font);
+    drawCanvas();
+}
+
+function onImgDrag(img) {
+    createImg(gImgs.length - 1, img, [''])
+    onCreateMeme(gImgs.length - 1)
+}
+
+function onToggleHamMenu() {
+    document.querySelector('.hamburger').classList.toggle("active");
+    document.querySelector('.nav-menu').classList.toggle("active");
 }
 
 function onToggleGallery() {
@@ -148,36 +181,37 @@ function onToggleGallery() {
     document.querySelector('main').classList.remove('editor');
     document.querySelector('.gallery').classList.remove('hidden');
     document.querySelector('.memes').classList.add('hidden');
-    document.querySelector('.gallery-button').classList.add('hidden');
-    document.querySelector('.memes-button').classList.remove('hidden');
-    document.querySelector('.canvas-editor').classList.add('hidden');
+    document.querySelector('.canvas').classList.add('hidden');
     document.querySelector('.keywords-container').classList.remove('hidden');
+    document.querySelector('.upload-image').classList.remove('hidden');
+    if (document.querySelector('.hamburger').classList.contains('active')) onToggleHamMenu()
 }
 
 function onToggleEditor() {
-    document.querySelector('.gallery-button').classList.remove('hidden');
-    document.querySelector('.memes-button').classList.remove('hidden');
-    document.querySelector('.canvas-editor').classList.remove('hidden');
+    document.querySelector('.canvas').classList.remove('hidden');
     document.querySelector('.layout').classList.remove('memes');
     document.querySelector('footer').classList.remove('memes');
     document.querySelector('.gallery').classList.add('hidden');
     document.querySelector('.memes').classList.add('hidden');
+    document.querySelector('.upload-image').classList.add('hidden');
     document.querySelector('.keywords-container').classList.add('hidden');
     document.querySelector('.layout').classList.add('editor');
     document.querySelector('main').classList.add('editor');
     document.querySelector('footer').classList.add('editor');
+    document.querySelector('.text-size').innerText = gMeme.lines[gMeme.selectedLineIdx].size;
     renderStickers()
 }
 
 function onToggleMemes() {
     document.querySelector('.gallery').classList.add('hidden');
     document.querySelector('.memes').classList.remove('hidden');
-    document.querySelector('.gallery-button').classList.remove('hidden');
-    document.querySelector('.memes-button').classList.add('hidden');
-    document.querySelector('.canvas-editor').classList.add('hidden');
+    document.querySelector('.canvas').classList.add('hidden');
     document.querySelector('.keywords-container').classList.add('hidden');
+    document.querySelector('.upload-image').classList.add('hidden');
     document.querySelector('.layout').classList.add('editor');
+    document.querySelector('.layout').classList.add('meme');
     document.querySelector('main').classList.add('editor');
     document.querySelector('footer').classList.add('editor');
+    if (document.querySelector('.hamburger').classList.contains('active')) onToggleHamMenu()
     renderMemes();
 }
