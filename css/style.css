@@ -801,12 +801,6 @@ footer {
     .hamburger.active .bar:nth-child(3) {
         transform: translateY(-10px) rotate(-45deg);
     }
-    header {
-        filter: unset
-    }
-    .keywords-container {
-        filter: unset
-    }
 }
 
 @media (max-width: 500px) {
