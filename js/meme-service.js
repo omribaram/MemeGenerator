@@ -153,8 +153,8 @@ function createSticker(img, posX, posY) {
         img,
         posX,
         posY,
-        size: 50,
-        width: 50
+        size: 100,
+        width: 100
     }
 }
 
