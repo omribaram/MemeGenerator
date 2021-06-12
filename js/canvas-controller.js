@@ -114,7 +114,7 @@ function onMouseMove(ev) {
 
 function onKeyDown(ev) {
     if (!document.querySelector('main').classList.contains('editor')) return
-    var blockedKeys = [20, 16, 17, 91, 18, 17, 16, 13, 33, 34, 19, 44, 45, 144, 13, 27, 112, 113, 115, 117, 119, 120, 123, 36, 35, 37, 39, 40, 38, 183];
+    var blockedKeys = [20, 16, 17, 91, 18, 17, 16, 13, 33, 34, 19, 44, 45, 144, 13, 27, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 36, 35, 37, 39, 40, 38, 183];
     if (blockedKeys.includes(ev.keyCode)) return
     if (ev.keyCode === 8 || ev.keyCode === 46) gLetters = gLetters.substring(0, gLetters.length - 1)
     else if (ev.keyCode === 9) {
