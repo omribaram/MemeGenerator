@@ -164,9 +164,10 @@ function shareMeme() {
 
 
 function addLine(text = 'Your Text Here...') {
-    var height = gMeme.lines.length > 1 ? gImgs[gMeme.selectedImgId].imgObj.height / 2 :
+    var posY = gMeme.lines.length > 1 ? gElCanvas.height / 2 :
         gMeme.lines.length === 0 ? 50 : gElCanvas.height - 20;
-    gMeme.lines.push(createLine(text, gElCanvas.width / 7, height));
+    var posX = gElCanvas.width / 7;
+    gMeme.lines.push(createLine(text, posX, posY));
     switchLine(gMeme.lines.length - 1)
 }
 
