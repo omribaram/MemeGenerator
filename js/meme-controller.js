@@ -105,6 +105,10 @@ function onChangePos(diff) {
     drawCanvas();
 }
 
+function onShareMeme() {
+    shareMeme();
+}
+
 function onSwitchLine(line) {
     var elInputText = document.querySelector('.text-input');
     elInputText.value = switchLine(line);

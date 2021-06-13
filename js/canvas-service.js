@@ -40,7 +40,7 @@ function drawImage(img) {
 }
 
 function drawText(line, idx, isFinal) {
-    gCtx.textAlign = line.align;
+    // gCtx.textAlign = line.align;
     gCtx.strokeStyle = line.color;
     gCtx.fillStyle = line.fillColor;
     gCtx.font = `${line.size}px ${line.font}`;
