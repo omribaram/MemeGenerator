@@ -484,7 +484,8 @@ input[type='range'] {
 .color-control {
     position: relative;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 150px;
     grid-column: 3/9;
     grid-row: 4/4;
 }
@@ -506,7 +507,8 @@ input[type='range'] {
 
 .text-align {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 50px;
     grid-column: 2/10;
     grid-row: 5/6;
     align-self: center;
@@ -630,6 +632,7 @@ footer {
     text-align: center;
     grid-column: 1/-1;
     grid-row: 4/5;
+    min-height: 120px;
 }
 
 footer.editor {
