@@ -143,7 +143,7 @@ function setKeyword(value) {
 
 function shareMeme() {
     fetch(getFinalCanvas()).then(function(blob) {
-        var file = new File([blob], "meme.jpeg", { type: 'image/jpeg' });
+        var file = new File([blob], "meme.jpg", { type: 'image/jpeg' });
         var filesArray = [file];
         if (navigator.canShare && navigator.canShare({ files: filesArray })) {
             navigator.share({
