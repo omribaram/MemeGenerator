@@ -7,10 +7,10 @@ function initCanvas() {
     gElCanvas = document.querySelector('[name="meme-canvas"]');
     gCtx = gElCanvas.getContext('2d');
     addEventListeners();
+    gElCanvas.style.cursor = 'grab'
 }
 
 function drawCanvas() {
-    gElCanvas.style.cursor = 'grab'
     drawImage();
     var lines = getLinesforCanvas();
     if (lines.length > 0) gLetters = lines[gMeme.selectedLineIdx].text;
@@ -40,11 +40,11 @@ function drawImage(img) {
 }
 
 function drawText(line, idx, isFinal) {
+    gCtx.textAlign = line.align;
     gCtx.strokeStyle = line.color;
     gCtx.fillStyle = line.fillColor;
     gCtx.font = `${line.size}px ${line.font}`;
     line.width = gCtx.measureText(line.text).width;
-    gCtx.textAlign = line.align;
     gCtx.fillText(line.text, line.posX, line.posY);
     gCtx.strokeText(line.text, line.posX, line.posY);
     gCtx.setLineDash([1, 1])
@@ -63,17 +63,12 @@ function drawText(line, idx, isFinal) {
     gCtx.setLineDash([])
 }
 
+// TODO
 // function addTxtShadow(line) {
 //     gCtx.shadowColor = line.shadowColor;
 //     gCtx.shadowOffsetX = line.shadowOffsetX;
 //     gCtx.shadowOffsetY = line.shadowOffsetY;
 //     gCtx.shadowBlur = line.shadowBlur;
-// }
-
-// function addTxtOutline(line) {
-//     gCtx.strokeStyle = line.strokeStyle;
-//     gCtx.lineWidth = line.lineWidth;
-//     gCtx.strokeText(line.text, line.posX, line.posY);
 // }
 
 function drawStickerImage(sticker, idx, isFinal) {

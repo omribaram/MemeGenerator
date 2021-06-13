@@ -32,7 +32,7 @@ function renderKeywords(size = 8) {
 
 function renderMemes() {
     var memes = getMemesforDisplay();
-    if (!memes) return document.querySelector('.memes').innerHTML = 'No saved memes.'
+    if (!memes) return document.querySelector('.memes').innerHTML = `<span class="empty-meme">No saved memes.</span>`
     var strHTMLs = memes.map((meme, idx) => {
         var img = new Image()
         img.src = meme.data;

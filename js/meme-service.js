@@ -118,7 +118,12 @@ function switchLine(line) {
 }
 
 function setAlign(dir) {
+    if (gMeme.lines[gMeme.selectedLineIdx].align === dir) return
     gMeme.lines[gMeme.selectedLineIdx].align = dir;
+    dir === 'left' ? gMeme.lines[gMeme.selectedLineIdx].posX = 20 :
+        dir === 'center' ? gMeme.lines[gMeme.selectedLineIdx].posX = (gElCanvas.width / 2) - (gMeme.lines[gMeme.selectedLineIdx].width / 2) :
+        gMeme.lines[gMeme.selectedLineIdx].posX = gElCanvas.width - gMeme.lines[gMeme.selectedLineIdx].width - 20;
+    drawCanvas();
 }
 
 function setOutlineColor(color) {
