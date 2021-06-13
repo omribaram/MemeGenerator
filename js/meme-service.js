@@ -153,10 +153,8 @@ function shareMeme() {
 
             if (navigator.canShare && navigator.canShare({ files: filesArray })) {
                 navigator.share({
-                    text: 'some_text',
-                    files: filesArray,
-                    title: 'some_title',
-                    url: 'some_url'
+                    text: 'Check out my Meme!',
+                    files: filesArray
                 });
             }
         })
