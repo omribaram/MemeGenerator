@@ -143,12 +143,13 @@ function setKeyword(value) {
 
 function shareMeme() {
     fetch(getFinalCanvas()).then(function(blob) {
-        var file = new File([blob], "meme.png", { type: 'image/png' });
+        var file = new File([blob], "meme.jpg", { type: 'image/jpeg' });
         var filesArray = [file];
         if (navigator.canShare && navigator.canShare({ files: filesArray })) {
             navigator.share({
-                text: 'Check out my Meme!',
-                files: filesArray
+                text: 'Check out my meme!',
+                files: filesArray,
+                title: 'Check out my meme!',
             });
         }
     })
