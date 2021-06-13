@@ -118,11 +118,10 @@ function switchLine(line) {
 }
 
 function setAlign(dir) {
-    if (gMeme.lines[gMeme.selectedLineIdx].align === dir) return
     gMeme.lines[gMeme.selectedLineIdx].align = dir;
-    dir === 'left' ? gMeme.lines[gMeme.selectedLineIdx].posX = 20 :
-        dir === 'center' ? gMeme.lines[gMeme.selectedLineIdx].posX = (gElCanvas.width / 2) - (gMeme.lines[gMeme.selectedLineIdx].width / 2) :
-        gMeme.lines[gMeme.selectedLineIdx].posX = gElCanvas.width - gMeme.lines[gMeme.selectedLineIdx].width - 20;
+    var line = gMeme.lines[gMeme.selectedLineIdx];
+    line.posX = dir === 'left' ? 20 : dir === 'center' ? (gElCanvas.width / 2) - (gMeme.lines[gMeme.selectedLineIdx].width / 2) :
+        gElCanvas.width - gMeme.lines[gMeme.selectedLineIdx].width - 20;
     drawCanvas();
 }
 
@@ -141,6 +140,21 @@ function setSearch(value) {
 function setKeyword(value) {
     gKeywords[value]++;
 }
+
+function shareMeme() {
+    fetch(getFinalCanvas()).then(function(blob) {
+        var file = new File([blob], "meme.jpeg", { type: 'image/jpeg' });
+        var filesArray = [file];
+        if (navigator.canShare && navigator.canShare({ files: filesArray })) {
+            navigator.share({
+                text: 'Check out my Meme!',
+                files: filesArray
+            });
+        }
+    })
+}
+
+
 
 function addLine(text = 'Your Text Here...') {
     var height = gMeme.lines.length > 1 ? gImgs[gMeme.selectedImgId].imgObj.height / 2 :
