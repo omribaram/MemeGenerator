@@ -142,22 +142,16 @@ function setKeyword(value) {
 }
 
 function shareMeme() {
-    fetch(getFinalCanvas())
-        .then(function(response) {
-            return response.blob()
-        })
-        .then(function(blob) {
-
-            var file = new File([blob], "picture.jpg", { type: 'image/jpeg' });
-            var filesArray = [file];
-
-            if (navigator.canShare && navigator.canShare({ files: filesArray })) {
-                navigator.share({
-                    text: 'Check out my Meme!',
-                    files: filesArray
-                });
-            }
-        })
+    fetch(getFinalCanvas()).then(function(blob) {
+        var file = new File([blob], "meme.png", { type: 'image/png' });
+        var filesArray = [file];
+        if (navigator.canShare && navigator.canShare({ files: filesArray })) {
+            navigator.share({
+                text: 'Check out my Meme!',
+                files: filesArray
+            });
+        }
+    })
 }
 
 
