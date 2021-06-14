@@ -291,7 +291,7 @@ header {
         gap: 10px;
     }
     .nav-menu {
-        position: absolute;
+        position: fixed;
         right: -100%;
         top: 6.8rem;
         flex-direction: column;
