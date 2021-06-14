@@ -291,23 +291,31 @@ header {
         gap: 10px;
     }
     .nav-menu {
-        position: fixed;
+        position: absolute;
         right: -100%;
-        top: 5rem;
+        top: 6.8rem;
         flex-direction: column;
-        background-color: rgb(0, 140, 255);
-        opacity: .9;
+        background-color: rgb(129, 204, 253);
+        opacity: 0.95;
         width: 100%;
-        border-radius: 10px;
+        border-radius: 0 0 30px 30px;
         text-align: center;
         transition: 0.3s;
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
     }
     .nav-menu.active {
         right: 0;
+        min-width: 510px;
     }
     .nav-item {
         margin: 2.5rem 0;
+    }
+    .nav-link,
+    .nav-link:link,
+    .nav-link:visited,
+    .nav-link:active {
+        color: #404040;
+        font-size: 1.8rem;
     }
     .hamburger {
         display: block;
