@@ -230,7 +230,7 @@ header {
 
 @media (min-width: 801px) and (max-width: 1110px) {
     .main-padding {
-        padding-inline: 10px;
+        padding-inline: 25px;
     }
     .layout {
         grid-template-rows: 100px max-content auto minmax(150px, 200px);
